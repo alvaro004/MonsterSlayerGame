@@ -114,6 +114,10 @@ button:disabled {
 	color: red;
 }
 
+.log--special--damage {
+	color: rgb(136, 33, 33);
+}
+
 .log--heal {
 	color: green;
 }
@@ -126,6 +130,22 @@ button:disabled {
 	background-color: #da8d00;
 }
 
-.dangerColorMonsterHealth{
-  background-color: #a81b32;
+.dangerColorMonsterHealth {
+	background-color: #a81b32;
+}
+
+#game-over-color {
+	color: #880017;
+}
+
+#win-color {
+	color: rgb(16, 161, 16);
+}
+
+#lost-color {
+	color: #ff002b;
+}
+
+#draw-color {
+	color: #da8d00;
 }

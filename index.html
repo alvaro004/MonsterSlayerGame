@@ -29,15 +29,34 @@
         <div class="healthbar__value" :class="changeColorBarPlayer" :style="playerStylesBar"></div>
       </div>
     </section>
-    <section id="controls">
+    <section class="container" v-if="gameStatus">
+      <h2 id="game-over-color">GAME OVER</h2>
+      <h2 id="win-color" v-if="gameStatus === 'Win'">You Win!</h2>
+      <h2 id="lost-color" v-if="gameStatus === 'Lost'">You Lost!</h2>
+      <h2 id="draw-color" v-if="gameStatus === 'Draw'">It's a Draw!</h2>
+      <button v-if="gameStatus" @click="resetGame">Start Again?</button>
+    </section>
+    <section id="controls" v-if="!gameStatus">
       <button @click="playerAttack">ATTACK</button>
       <button @click="specialAttack" :disabled="disableBtnAttack">SPECIAL ATTACK</button>
       <button @click="healPlayer" :disabled="disableBtnHeal">HEAL</button>
-      <button>SURRENDER</button>
+      <button @click="surrenderPlayer">SURRENDER</button>
     </section>
     <section id="log" class="container">
       <h2>Battle Log</h2>
       <ul>
+        <li v-for="logMessage in logMessages">
+          <span :class="logMessage.byWho === 'Player' ? 'log--player' : 'log--monster'"> {{logMessage.byWho}} - </span>
+          <span v-if="logMessage.whatThing === 'heal'">
+            <span class="log--heal">heal himself</span>
+          </span>
+          <span v-else-if="logMessage.whatThing === 'special attack'">
+            <span class="log--special--damage">special attack</span>
+          </span>
+          <span v-else>
+            <span class="log--damage">attack</span>
+          </span> for +{{logMessage.forMany}}
+        </li>
       </ul>
     </section>
   </div>
